@@ -1,31 +1,39 @@
-#include <stdio.h>
-#include <stdlib.h>
-char    *ft_strdup(const char *s);
-size_t  ft_strlen(const char *str);
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: museker <museker@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/04 10:27:29 by museker           #+#    #+#             */
+/*   Updated: 2023/07/04 16:09:49 by museker          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char    *ft_substr(char const *s, unsigned int start, size_t len)
+#include "libft.h"
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-    char *p;
-    size_t i;
-    size_t s_len;
+	char	*p;
+	size_t	i;
+	size_t	s_len;
 
-    s_len = ft_strlen(s);
-    if (!s)
-        return (NULL);
-    if (start >=s_len || s_len == 0 || len == 0)
-        return (ft_strdup(""));
-    if(len> s_len - start)
-        len = s_len - start;
-    p = (char *)malloc(sizeof(char) * len +1);
-    if(!p)
-        return (NULL);
-    i = 0;
-    while (s[start +i] && i < len)
-    {
-        p[i] = s[start +i];
-        i++;
-    }
-    p[i] = '\0';
-    return (p);
-    
+	s_len = ft_strlen(s);
+	if (!s)
+		return (NULL);
+	if (start >= s_len || s_len == 0 || len == 0)
+		return (ft_strdup(""));
+	if (len > s_len - start)
+		len = s_len - start;
+	p = (char *)malloc(sizeof(char) * (len + 1));
+	if (!p)
+		return (NULL);
+	i = 0;
+	while (s[start + i] && i < len)
+	{
+		p[i] = s[start + i];
+		i++;
+	}
+	p[i] = '\0';
+	return (p);
 }

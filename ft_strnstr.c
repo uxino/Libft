@@ -1,34 +1,42 @@
-#include <stdio.h>
-#include <string.h>
-size_t ft_strlen(const char *str);
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: museker <museker@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/03 18:08:32 by museker           #+#    #+#             */
+/*   Updated: 2023/07/05 16:28:20 by museker          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char    *ft_strnstr(const char *haystack, const char *needle, size_t len)
+#include "libft.h"
+
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-    size_t i;
-    size_t j;
-    
-    i = 0;
-    j = 0;
-    if (!(needle[i]))
-    {
-        return ((char *)haystack);
-    }
-    
-    while (haystack[i] && i< len - 1)
-    {
-        if (haystack[i] == needle[j])
-        {
-            while (haystack[i] == needle[j] && haystack[i])
-            {
-                i++;
-                j++;
-            }
-            if (ft_strlen(needle) == j)
-            {
-                return ((char *)haystack + i);
-            }
-        }
-        i++;
-    }
-    return NULL;
+	size_t	i;
+	size_t	j;
+	size_t	p;
+
+	i = 0;
+	if (!(*needle))
+		return ((char *)haystack);
+	while (haystack[i] && i < len)
+	{
+		j = 0;
+		if (haystack[i] == needle[j])
+		{
+			p = i;
+			while (haystack[i] == needle[j] && haystack[i] && i < len)
+			{
+				i++;
+				j++;
+			}
+			if (!needle[j])
+				return ((char *)haystack + p);
+			i = p;
+		}
+		i++;
+	}
+	return (NULL);
 }

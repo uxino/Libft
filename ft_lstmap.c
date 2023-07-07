@@ -1,28 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: museker <museker@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/06 20:36:06 by museker           #+#    #+#             */
+/*   Updated: 2023/07/07 13:12:03 by museker          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list *new_list;
-	t_list *save;
+	t_list	*start;
+	t_list	*new_list;
+	t_list	*current;
+	t_list	*new_node;
 
 	if (!lst || !f || !del)
-		return (0);
+		return (NULL);
+	start = lst;
 	new_list = ft_lstnew(f(lst->content));
 	if (!new_list)
-		return (0);
-	save = new_list;
-	lst = lst->next;
-	while (lst)
+		return (NULL);
+	current = new_list;
+	while (start->next)
 	{
-		new_list->next = ft_lstnew(f(lst->content));
-		if (!new_list->next)
+		start = start->next;
+		new_node = ft_lstnew(f(start->content));
+		if (!new_node)
 		{
-			ft_lstclear(&save, del);
-			return (0);
+			ft_lstclear(&new_list, del);
+			return (NULL);
 		}
-		new_list = new_list->next;
-		lst = lst->next;
+		current->next = new_node;
+		current = current->next;
 	}
-	new_list->next = NULL;
-	return (save);
+	return (new_list);
 }

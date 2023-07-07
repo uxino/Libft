@@ -1,52 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: museker <museker@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/04 15:36:48 by museker           #+#    #+#             */
+/*   Updated: 2023/07/04 16:28:55 by museker          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
 
-size_t ft_strlen(const char *str)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-    int i;
-    
-    i = 0;
-    while (str[i])
-    {
-        i++;
-    }
-    return (i);
-    
-}
-char toup(unsigned int i, char c)
-{
-  if (i % 2 == 0)
-  {
-    c -= 32;
-  }
-  return (c);
-}
+	char	*p;
+	int		i;
+	int		len;
 
-
-char    *ft_strmapi(char const *s, char (*f)(unsigned int, char))
-{
-    int len;
-    char *p;
-    size_t i;
-
-    i = 0;
-    len = ft_strlen(s);
-    p = (char *)malloc(sizeof(char) * (len + 1));
-    if(!p)
-        return (NULL);
-    while (i<len)
-    {
-        p[i] = (*f)(i,s[i]);
-        i++;
-    }
-    p[len] = '\0';
-    return (p);
-}
-int main()
-{
-
-    const char *p = "aaaaaa";
-    printf("%s",ft_strmapi(p,&toup));
-    return (0);
+	i = 0;
+	len = ft_strlen(s);
+	p = (char *)malloc(sizeof(char) * (len + 1));
+	if (!p)
+		return (NULL);
+	while (i < len)
+	{
+		p[i] = (*f)(i, s[i]);
+		i++;
+	}
+	p[len] = '\0';
+	return (p);
 }

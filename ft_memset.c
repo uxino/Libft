@@ -1,31 +1,28 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-void *ft_memset(void *a,int c, size_t len)
-{
-    size_t i;
-    unsigned char *str;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: museker <museker@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/03 12:58:30 by museker           #+#    #+#             */
+/*   Updated: 2023/07/03 13:52:05 by museker          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-    i = 0;
-    str = (unsigned char *)a;
-    while (i<len)
-    {
-        str[i] = (unsigned char)c;
-        i++;
-    }
-    return (a);
-}
-int main()
+#include "libft.h"
+
+void	*ft_memset(void *a, int c, size_t len)
 {
-    int *p = (int *)malloc(sizeof(int) * 5);
-    p[0] = 1;
-    p[1] = 2;
-    p[2] = 3;
-    memset(p,30,sizeof(int) * 3);
-    int i = 0;
-    while (i<3)
-    {
-        printf("%d  ",(char)p[i]);
-        i++;
-    }
+	size_t			i;
+	unsigned char	*str;
+
+	i = 0;
+	str = (unsigned char *)a;
+	while (i < len)
+	{
+		str[i] = (unsigned char)c;
+		i++;
+	}
+	return (a);
 }
